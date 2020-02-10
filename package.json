@@ -11,7 +11,7 @@
     "test": "node build/jenkins_test.js"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
+    "@babel/polyfill": "^7.8.3",
     "animate.css": "^3.7.2",
     "countup": "^1.8.2",
     "echarts": "^4.6.0",
@@ -23,7 +23,7 @@
     "mavon-editor": "^2.7.7",
     "moment": "^2.24.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.3",
+    "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.4.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^3.2.1",
     "ora": "^1.2.0",
     "portfinder": "^1.0.25",
