@@ -1,6 +1,6 @@
-# Game cms
+# Admin system cms
 
-> Game cms front end
+> Admin system cms front-end
 
 ## Build Setup
 
