@@ -1,0 +1,154 @@
+@import "base";
+// 在这里改变ui 框架的 默认样式
+
+
+.el-button {
+  border-bottom-right-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-top-right-radius: 2px !important;
+  transition: all 0.5s;
+  //border: none;
+
+}
+
+
+.el-button--primary {
+
+  //
+  //background-image: linear-gradient(120deg, $baseColor3 50%, #8ebcbd 100%)!important;
+  &:hover {
+
+    //background-image: linear-gradient(120deg, $baseColor3 95%, #8ebcbd 100%)!important;
+    box-shadow: 0 2px 8px 0 #94a09f;
+  }
+
+}
+
+//.button-shadow{
+//  transition: all 0.5s;
+//  &:hover{
+//    box-shadow: 0 2px 6px 0 rgba(79, 79, 79, 0.3);
+//  }
+//}
+
+.el-input__inner {
+  border-bottom-right-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-top-right-radius: 2px !important;
+  transition: all 0.5s;
+}
+
+.el-message {
+  border-bottom-right-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-top-right-radius: 2px !important;
+
+}
+
+.el-message-box {
+  border-bottom-right-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-top-right-radius: 2px !important;
+}
+
+//表格 样式控制
+.el-table {
+  tr {
+    background-color: transparent !important;
+  }
+
+  th {
+    text-align: center !important;
+    background-color: transparent !important;
+    color: white;
+    padding: 6px 0 !important;
+
+    & > .cell.highlight {
+      color: #8e6aa9;
+      font-weight: bold;
+    }
+
+  }
+}
+
+//.el-table th > .cell.highlight {
+//  color: #051133;
+//  font-weight: bold;
+//}
+
+
+.el-table__header-wrapper {
+
+  background-color: $baseColor3;
+  //background-image: linear-gradient(120deg, $baseColor3 10%, #7bbdbc 70%);
+  //background-image: linear-gradient(120deg, #90a7ec 10%, #afe0f4 80%);
+  background-image: linear-gradient(120deg, #97b0ff 10%, #8ed5fd 80%);
+  background-size: 100% 100%;
+
+  .el-icon-arrow-down {
+    color: white;
+  }
+
+}
+
+//表格 样式控制结束
+
+
+//加载动画
+
+.el-loading-spinner {
+  font-size: 26px !important;
+  //color: white!important;
+  i {
+    //font-weight: bold!important;
+    font-size: 36px !important;
+
+  }
+}
+
+.el-loading-text {
+  //color: white!important;
+}
+
+
+//  加载请求时  鼠标的效果
+.is-fullscreen {
+  cursor: wait;
+}
+
+//隐藏横向滚动条  会影响到别的组件  所以加一个frame-aside包裹层 限制作用域  这里作用于侧边栏
+.frame-aside {
+  opacity: 0.9;
+
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+
+}
+
+
+// 可视化界面 里边的  滚动条
+.home2_wrapper {
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+
+}
+
+.el-form-item__label {
+  text-align: left !important;
+  font-weight: bold;
+
+}
+
+.el-table .warning-row {
+  background: oldlace !important;
+}
+
+.el-table .success-row {
+  background: #f0f9eb !important;
+}

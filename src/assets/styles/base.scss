@@ -1,0 +1,40 @@
+@charset "UTF-8";
+//$baseColor1: #005da0;//背景色
+$baseColor1: #4350ac;
+$baseColor2: #4f5254;
+$baseColor3: #33a0d7;//蓝色
+$baseColor4:#393939;
+$baseColor5: #7c5ecd;
+//$baseColor-cyan:#63c4cd;
+$baseColor-cyan: #cd3cba;
+//墨绿#009f95
+$fontColor1:#2b3643;//浅色背景下的字体颜色
+$fontColor2:rgb(198, 207, 218);//深色背景下的字体颜色
+
+
+
+//浅色  用于背景
+$light_red:#fef0f0;
+
+$light_green:#f0f9eb;
+
+$light_yellow: rgb(253, 246, 236);
+
+$light_gray: #f8f8f8;
+
+$light_blue:  aliceblue;
+
+
+::selection {
+  background:$baseColor3;
+  color:white;
+}
+::-moz-selection {
+  background:$baseColor3;
+  color:white;
+}
+
+@import "mixin";
+
+
+

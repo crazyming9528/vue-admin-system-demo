@@ -1,0 +1,36 @@
+/*
+Error: Invalid GBK character "\xE5"
+        on line 2 of changeUI.scss
+
+1: @import "base";
+2: // 在这里改变ui 框架的 默认样式
+3: 
+4: 
+5: .el-button {
+6:   border-bottom-right-radius: 2px !important;
+7:   border-bottom-left-radius: 2px !important;
+
+Backtrace:
+changeUI.scss:2
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:1090:in `rescue in block in find_encoding_error'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:1087:in `block in find_encoding_error'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:1086:in `each'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:1086:in `each_with_index'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:1086:in `find_encoding_error'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/util.rb:814:in `check_sass_encoding'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/engine.rb:444:in `check_encoding!'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/engine.rb:400:in `_to_tree'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/exec/sass_scss.rb:387:in `run'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/exec/base.rb:50:in `parse'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/lib/sass/exec/base.rb:18:in `parse!'
+D:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.7.2/bin/sass:13:in `<top (required)>'
+d:/Ruby25-x64/bin/sass:23:in `load'
+d:/Ruby25-x64/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid GBK character \"\xE5\"\A         on line 2 of changeUI.scss\A \A 1: @import \"base\";\A 2: // 在这里改变ui 框架的 默认样式\A 3: \A 4: \A 5: .el-button {\A 6:   border-bottom-right-radius: 2px !important;\A 7:   border-bottom-left-radius: 2px !important;"; }

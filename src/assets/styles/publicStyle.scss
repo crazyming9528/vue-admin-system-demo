@@ -1,0 +1,174 @@
+//清除默认样式
+@import "reset";
+//引入基础样式配置
+@import "base";
+//引入对ui 框架的 改变
+@import "changeUI";
+//动画 过度效果
+@import "transition";
+
+//需要写全局样式的话 就写在这里
+
+
+
+.bg-white {
+  background-color: white!important;
+}
+
+.bg-red {
+  background-color: $light_red!important;
+}
+
+.bg-green {
+  background-color: $light_green!important;
+}
+
+.bg-yellow {
+  background-color: $light_yellow!important;
+}
+
+.bg-gray {
+  background-color: $light_gray!important;
+}
+
+.bg-blue {
+  background-color: $light_blue!important;
+}
+
+.font-color-red {
+  color: #f56c6c!important;
+}
+
+.font-color-yellow {
+  color: #e6a23c!important;
+}
+
+.font-color-green {
+  color: #67c23a!important;
+}
+
+.font-color-blue {
+  color: #409eff!important;
+}
+
+.text-line {
+  text-decoration: line-through
+}
+
+.count_up {
+  font-weight: lighter;
+  font-size: 18px;
+  color: gray;
+}
+
+.padding_none{
+  padding: 0!important;
+  .el-card__body{
+    padding: 0!important;
+  }
+}
+
+input::-webkit-input-placeholder {
+  /* placeholder颜色  */
+  color: #cdcdcd;
+  /* placeholder字体大小  */
+  //font-size: 12px;
+  /* placeholder位置  */
+  text-align: left;
+}
+
+
+.c-main, .page_wrapper {
+
+//局部标题
+  .part_title {
+    color: lighten($baseColor2, 35%);
+    font-weight: normal;
+    border-left: 2px solid darken($baseColor3, 10%);
+    padding-left: 10px;
+    margin: 20px 0;
+    transition: all .5s;
+    font-size: 16px;
+
+    &:hover {
+      border-left: 3px solid darken($baseColor3, 10%);
+      padding-left: 20px;
+    }
+  }
+
+
+  .form_footer_button{
+    margin: 0 25px;
+    text-align: center;
+    background-color: #ececec;
+    padding: 20px;
+    border-top: 8px solid #d0d0d0;
+    border-radius: 20px;
+  }
+
+  //通用的面板区域 间距
+  .panelArea, .panel_area {
+    margin-bottom: 20px;
+  }
+
+  .mainBody, .main_body {
+    margin-top: 15px;
+
+    h5 {
+      margin-left: 15px;
+      color: gray;
+      span{
+        margin-right: 10px;
+      }
+    }
+
+
+    background-color: white;
+    padding: 20px;
+    //padding-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px 0 #e9e9e9;
+
+    .headArea, .head_area {
+      margin-bottom: 50px;
+      border-bottom: 1px #f1f1f1 solid;
+      padding-bottom: 10px;
+      margin-top: 0px;
+
+      .title {
+        font-size: 28px;
+        color: $baseColor3;
+      }
+
+      .description {
+        font-size: 14px;
+        color: gray;
+        padding-left: 5px;
+      }
+
+    }
+  }
+
+  .topArea, .top_area {
+
+    padding: 5px;
+    //background-color: aliceblue;
+
+  }
+
+  //
+  //.headArea {
+  //  padding-top: 15px;
+  //  .title {
+  //    font-size: 28px;
+  //    color: $baseColor3;
+  //  }
+  //  .description {
+  //    font-size: 14px;
+  //    color: gray;
+  //    padding-left: 5px;
+  //  }
+  //
+  //}
+}
+
