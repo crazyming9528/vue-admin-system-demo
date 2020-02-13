@@ -184,7 +184,7 @@
             routes() {
 
 
-                console.log(this.$router.options.routes);
+               // console.log(this.$router.options.routes);
                 //  不用 foreach,es6 find 实践
                 let Frame = this.$router.options.routes.find(item => item.name === 'Frame');
 
@@ -320,7 +320,7 @@
 
         }, mounted() {
             this.username = this.operatorInfo.operator_name;
-            console.log({...mapGetters(['systemInfo', 'showNav', 'showTop', 'showBreadcrumb', 'operatorInfo'])}, 55555)
+            //console.log({...mapGetters(['systemInfo', 'showNav', 'showTop', 'showBreadcrumb', 'operatorInfo'])}, 55555)
         }
     }
 </script>

@@ -1,7 +1,7 @@
 import request from "../utils/request";
 
 export function liveRate(params) {
-  request({
+ return  request({
     url: "/live_rate",
     method: "get",
     params

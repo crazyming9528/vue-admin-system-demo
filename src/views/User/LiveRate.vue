@@ -234,17 +234,17 @@
               </el-table-column>
 
 
-              <el-table-column
-                align="center"
-                fixed="right"
-                label="平均生命天数"
-                width="150">
+<!--              <el-table-column-->
+<!--                align="center"-->
+<!--                fixed="right"-->
+<!--                label="平均生命天数"-->
+<!--                width="150">-->
 
-                <template slot-scope="scope">
-                  <div> {{scope.row.avg_life.toFixed(2)}}</div>
-                </template>
+<!--                <template slot-scope="scope">-->
+<!--                  <div> {{scope.row.avg_life.toFixed(2)}}</div>-->
+<!--                </template>-->
 
-              </el-table-column>
+<!--              </el-table-column>-->
 
             </el-table>
           </el-card>
@@ -280,7 +280,6 @@
     import tableMixin from "@/mixin/tableMixin";
     import TableToolsBox from "@/components/childComponents/TableToolsBox";
     import EchartComponent from "@/components/childComponents/echartComponent";
-    import moment from "moment";
     import {liveRate} from '../../api/user';
 
     export default {
@@ -345,8 +344,10 @@
                     pageSize: this.tableMixin_pageSize
 
                 }).then(res => {
-                    const {code, data, message, addition} = res;
+                    const {code, data, message, addition} = res.data;
                     if (code === 10000) {
+
+                        console.log(data.data);
                         this.tableData = data.data;
                         this.tableMixin_total = data.total;
                     }

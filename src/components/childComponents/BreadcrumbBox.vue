@@ -27,7 +27,7 @@
     created() {
       let matched = this.$route.matched.filter(item => item.meta && item.meta.title);
       matched = [{path: '/', meta: {title: 'Home'}}].concat(matched)
-      console.log(matched);
+      //console.log(matched);
       this.breadcrumb = matched;
       // console.log(this.$router)
     },

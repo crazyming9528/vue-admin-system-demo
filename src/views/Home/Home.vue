@@ -10,7 +10,7 @@
         </el-col>
       </el-row>
       <transition name="slide-fade">
-<!--        <h3 v-if="realTimeData.allData.length">总数据实时统计</h3>-->
+        <!--        <h3 v-if="realTimeData.allData.length">总数据实时统计</h3>-->
       </transition>
       <el-row class="dataVisualization  panelArea">
         <transition-group name="slide-fade">
@@ -79,24 +79,24 @@
         methods: {
             getLoginEchart() {
                 return new Promise((resolve, reject) => {
-                    this.globalMixin_request('rts_echart?type=login').then(res => {
-                        const {code, data, message} = res;
-                        if (code === 10000) {
-                            let option = this._.cloneDeep(LoginOption);
-                            data.hour = data.hour.map((item) => {
-                                return item + ":00 - " + item + ":59";
-                            });
-                            option.legend.data = data.hour;
-                            option.xAxis.data = data.hour;
-                            option.series[0].data = data.data;
-                            option.series[0].name = "登录人数";
-                            option.series[1].data = data.all;
-                            option.series[1].name = "登录次数";
-                            this.loginEchartOption = option;
-                            resolve(true);
-                        }
 
-                    })
+
+                    //模拟的 异步 echart 数据
+                    setTimeout(() => {
+                        let option = this._.cloneDeep(LoginOption);
+                        let hour = [0,1,2,3,4].map((item) => {
+                            return item + ":00 - " + item + ":59";
+                        });
+                        option.legend.data =hour;
+                        option.xAxis.data = hour;
+                        option.series[0].data = [6962,4697,2832,1694,918];
+                        option.series[0].name = "登录人数";
+                        option.series[1].data = [10269,6917,4138,2414,1284];
+                        option.series[1].name = "登录次数";
+                        this.loginEchartOption = option;
+                        resolve(true);
+                    },800)
+
                 })
             },
             getData(type) {
@@ -132,7 +132,7 @@
 
             getRealTimeStatistics() {
 
-                Promise.all([this.getData('allData'), this.getData('todayData'), this.getData('roomData'), this.getLoginEchart()]).then((res) => {
+                Promise.all([this.getData('allData'), this.getLoginEchart()]).then((res) => {
                     const isOk = res.every(item => item);
                     if (isOk) {
                         this.updateTime = new Date();
@@ -163,6 +163,7 @@
 <style lang="scss" scoped>
   /*@import "../../assets/styles/base.css";*/
   @import "../../assets/styles/base.scss";
+
   .slide-fade-enter-active {
     transition: all 1s;
   }
