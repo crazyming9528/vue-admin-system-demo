@@ -38,24 +38,25 @@
             hasChildren(item) {
                 return !!(item.children && item.children.length > 0);
             },
-            findAncestors(source, title, obj) {
-                obj = obj ? obj : {};
-                source.forEach((item, index) => {
-                    if (item.meta.title === title) {
-                        item.path += item.meta.title;
-                        if (obj.meta.title) {
-                            this.findAncestors(data, obj.meta.title);
-                        }
-                    } else {
-                        if (item.children.length > 0) {
-                            this.findAncestors(item.children, title, item)
-                        }
-                    }
-                })
-            },
+
+            // findAncestors(source, title, obj) {
+            //     obj = obj ? obj : {};
+            //     source.forEach((item, index) => {
+            //         if (item.meta.title === title) {
+            //             item.path += item.meta.title;
+            //             if (obj.meta.title) {
+            //                 this.findAncestors(data, obj.meta.title);
+            //             }
+            //         } else {
+            //             if (item.children.length > 0) {
+            //                 this.findAncestors(item.children, title, item)
+            //             }
+            //         }
+            //     })
+            // },
         },
         created() {
-            // console.log(this.routes);
+            console.log(this.routes, 5555555);
         },
         mounted() {
         },

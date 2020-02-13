@@ -9,7 +9,7 @@ export const dynamicRoutes = {
   component: Frame,
   // redirect: '/Login',
   children: [
-    // {path: '/', redirect: 'home'},
+    {path: '/', redirect: 'Home'},
     {
       path: '/Home',
       name: 'Home',
@@ -19,9 +19,9 @@ export const dynamicRoutes = {
       }
     },
     {
-      path: 'User',
+      path: '/User',
       name: 'User',
-      redirect: 'User/UserList',
+      // redirect: 'User/UserList',
       component: Layout,
       meta: {
         title: '用户管理'
@@ -44,10 +44,19 @@ export const dynamicRoutes = {
             title: '用户信息'
           }
         },
+        {
+          path: 'LiveRate',
+          name: 'LiveRate',
+          component: () => import('@/views/User/LiveRate'),
+          hidden: false,
+          meta: {
+            title: '用户留存'
+          }
+        },
       ]
     },
     {
-      path: 'Statement',
+      path: '/Statement',
       name: 'Statement',
       redirect: 'Statement/WechatRedPackage',
       component: Layout,
@@ -77,7 +86,7 @@ export const dynamicRoutes = {
 
     },
     {
-      path: 'Channel',
+      path: '/Channel',
       name: 'Channel',
       redirect: 'Channel/ChannelManage',
       component: Layout,
@@ -98,7 +107,7 @@ export const dynamicRoutes = {
       ]
     },
     {
-      path: 'WechatModule',
+      path: '/WechatModule',
       name: 'WechatModule',
       redirect: 'WechatModule/WechatJump',
       component: Layout,
@@ -118,7 +127,7 @@ export const dynamicRoutes = {
 
       ]
     }, {
-      path: 'Auth',
+      path: '/Auth',
       name: 'Auth',
       redirect: 'Auth/OperatorList',
       component: Layout,

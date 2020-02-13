@@ -7,7 +7,6 @@
         <el-col :span="24">
           <span class="title">权限配置</span>
           <span class="description">{{this.$store.getters.systemInfo.title}} 权限配置</span>
-          <el-button @click.native="getRoutes" plain size="mini" type="success">获取</el-button>
         </el-col>
       </el-row>
 

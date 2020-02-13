@@ -83,8 +83,6 @@
 
                                     // this.$router.addRoutes([dynamicRoutes]);
                                     // this.$router.options.routes.push(dynamicRoutes);
-
-
                                     this.globalMixin_jump('Home');
                                     // window.location.reload();//导航path 错误bug 临时解决方法
 

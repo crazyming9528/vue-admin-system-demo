@@ -186,21 +186,28 @@
 
                 console.log(this.$router.options.routes);
                 //  不用 foreach,es6 find 实践
-                let Frame = this.$router.options.routes.find(item => item.name === 'Frame')
+                let Frame = this.$router.options.routes.find(item => item.name === 'Frame');
 
-                Frame.children.forEach((item, index) => {
-                    if (item.children) {
-                        item.children.forEach(child => {
-                            child.path = '/' + item.path + '/' + child.path
-                            // child.path = '/' + child.path
-                        })
-                    }
+                const tree = _.cloneDeep(Frame.children);
+                const changePath = function (source, obj) {
+                    let ob = obj || {};
+                    source.forEach((item, index) => {
+                        if (ob.path){
+                            item.path = ob.path + '/' + item.path;
+                        }
+                        if (item.children) {
+                            changePath(item.children, item);
+                        }
+                    });
 
-                    if (item.path === '/') Frame.children.splice(index, 1);
+                    return source;
 
-                });
+                };
 
-                return Frame.children;
+
+
+
+                return changePath(tree);
 
             },
 
