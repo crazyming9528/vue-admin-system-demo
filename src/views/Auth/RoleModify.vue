@@ -19,7 +19,7 @@
         <el-col :span="24">
           <el-form :model="form" label-width="80px" ref="form">
             <label for="name">角色名称:</label>
-            <el-input id="name" v-model="form.roleName"></el-input>
+            <el-input id="name" v-model="form.roleName" :disabled="rid==1"></el-input>
             <label for="description" style="margin-left: 15px">角色描述:</label>
             <el-input id="description" style="width: 500px" v-model="form.description"></el-input>
 
@@ -29,7 +29,7 @@
       </el-row>
 
 
-      <el-row :gutter="20" class="panel_area">
+      <el-row v-if="rid !=1" :gutter="20" class="panel_area">
         <el-col :span="24">
           <h3 class="part_title">角色权限修改</h3>
         </el-col>
@@ -58,6 +58,18 @@
           </el-alert>
         </el-col>
 
+      </el-row>
+
+      <el-row v-else  :gutter="20" class="panel_area">
+        <el-col :span="24">
+        <h3 class="part_title">角色权限修改</h3>
+        </el-col>
+        <el-col :span="24" >
+          <el-alert
+            title="无法修改超级管理员的权限,超级管理员拥有全部权限！"
+            type="info">
+          </el-alert>
+        </el-col>
       </el-row>
 
 

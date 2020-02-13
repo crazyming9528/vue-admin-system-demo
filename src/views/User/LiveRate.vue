@@ -1,5 +1,5 @@
 <template>
-  <div class="page_wrapper" v-show="pageMixin_showPage">
+  <div class="page_wrapper">
 
 
     <div class="main_body animated  fadeIn">
@@ -37,16 +37,6 @@
         </el-col>
       </el-row>
 
-      <!--      <el-row :gutter="20" class="panel_area ">-->
-      <!--        <el-col :span="24" class="echart_wrapper" style="height: 460px">-->
-
-
-      <!--          <EchartComponent :option="liveRateEchartOption"-->
-      <!--                           v-if="this.liveRateEchartOption">-->
-      <!--          </EchartComponent>-->
-      <!--        </el-col>-->
-
-      <!--      </el-row>-->
 
       <el-row :gutter="20" class="panel_area">
         <el-col :span="24">
@@ -55,6 +45,7 @@
               :cell-style="getCellStyle"
               :data="tableData"
               :row-style="{cursor: 'pointer'}"
+              :v-loading="tableMixin_tableLoading"
               @row-click="tableRowClickFn"
               @sort-change="tableSortFn"
               border
@@ -290,6 +281,7 @@
     import TableToolsBox from "@/components/childComponents/TableToolsBox";
     import EchartComponent from "@/components/childComponents/echartComponent";
     import moment from "moment";
+    import {liveRate} from '../../api/user';
 
     export default {
         name: "LiveRate",
@@ -343,8 +335,8 @@
              * 获取表格数据
              */
             getTableDataSource() {
-
-                this.globalMixin_request('/live_rate', "get", {
+                this.tableMixin_tableLoading = true;
+                liveRate({
                     startTime: this.searchParameterRes.dateRange[0],
                     endTime: this.searchParameterRes.dateRange[1],
                     sortBy: this.tableSort.sortBy,//排序字段
@@ -355,43 +347,16 @@
                 }).then(res => {
                     const {code, data, message, addition} = res;
                     if (code === 10000) {
-
-
                         this.tableData = data.data;
                         this.tableMixin_total = data.total;
-
-                        // let option = this._.cloneDeep(liveRateOption);
-                        // option.series[0].data = Object.keys(data[0]).map((item, index) => {
-                        //     return data[0][item];
-                        // });
-                        // option.series[0].data.splice(0,1);
-                        // console.log(option);
-                        // this.liveRateEchartOption = option;
-                        // this.tableData =data
-
                     }
 
+                }).finally(() => {
+                    this.tableMixin_tableLoading = false;
                 })
 
             },
 
-            lifeFn(row) {
-                const timestamp = moment(row.date).valueOf();
-                this.globalMixin_request('life_cycle_avg?time=' + "2020-02-07 00:00:00").then(r => {
-                    console.log(r);
-                })
-            },
-
-            getStatistical() {
-
-                this.globalMixin_request('/h5_player_statistical', "get").then(res => {
-                    const {code, data, message, addition} = res;
-                    if (code === 10000) {
-                        this.statistical = data;
-                    }
-                })
-
-            },
 
             /**
              * 清除已选/已填写 的搜索参数
@@ -408,25 +373,17 @@
              * 刷新
              */
             refresh() {
-                this.resetPage();
+                this.tableMixin_resetCurrentPage();//分页 回到第一页
                 this.clearSearchParameterRes();
                 this.getTableDataSource();
-                this.getStatistical();
 
             },
             /**
              * 执行搜索
              */
             searchFn() {
-                this.resetPage();
+                this.tableMixin_resetCurrentPage();//分页 回到第一页
                 this.getTableDataSource();
-            },
-            /**
-             * 重置页面
-             */
-            resetPage() {
-                this.tableMixin_currentPage = 1;
-
             },
             /**
              * 导出表格

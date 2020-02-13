@@ -10,8 +10,8 @@
           <el-input type="password" v-model.trim="form.password"></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button @click="login" type="primary">登录</el-button>
-          <!--          <el-button @click="register" type="text">注册账号</el-button>-->
+          <el-button @click="loginFn" type="primary">登录</el-button>
+          <!--          <el-button @click="registerFn" type="text">注册账号</el-button>-->
         </el-form-item>
       </el-form>
 
@@ -37,10 +37,9 @@
 </template>
 
 <script>
-    import {login} from "@/api/operator"
     import {mapMutations} from "vuex";
     import {getRoleInfoById} from "../../api/role";
-    import {dynamicRoutes} from "../../router/dynamicRoutes";
+    import {login} from "../../api/operator"
 
     export default {
         name: "login",
@@ -52,56 +51,76 @@
                 form: {
                     username: "",
                     password: "",
-                }
+                },
+                temp: null,
             }
         },
+        computed: {},
         methods: {
             ...mapMutations(["setOperatorInfo", "setOperatorRole"]),
-            login() {
-                if (!this.form.username || !this.form.password) {
-                    this.ele_notify('用户名和密码不能为空', 'warning', '提示');
-                    return;
-                }
-                login(this.form.username, this.form.password).then(res => {
-                    const {code, data: userData, message, addition} = res.data;
-                    if (code === 10000) {
+            checkAccount() {
+                return new Promise((resolve, reject) => {
 
-                        if (!userData.rid) {
-                            this.ele_notify("该账号无角色信息,请联系管理员!", "warning");
-                            return;
-                        }
-
-                        localStorage.setItem('operator', this.$base64.encode(JSON.stringify(userData)));
-                        // this.$store.commit('setOperatorInfo', data);
-                        this.setOperatorInfo(userData);
-                        getRoleInfoById(userData.rid).then(res => {
-
-                                const {code, data, message, addition} = res.data;
-                                if (code === 10000) {
-                                    localStorage.setItem('role', this.$base64.encode(JSON.stringify(data)));
-                                    this.setOperatorRole(data);
-
-                                    // this.$router.addRoutes([dynamicRoutes]);
-                                    // this.$router.options.routes.push(dynamicRoutes);
-                                    this.globalMixin_jump('Home');
-                                    // window.location.reload();//导航path 错误bug 临时解决方法
-
-                                }
-                            }
-                        );
-
-
-                    } else if (code === 10301
-                    ) {
-                        this.ele_notify('用户名或密码错误', 'warning', '提示');
-                        this.form.username = '';
-                        this.form.password = '';
+                    if (!this.form.username || !this.form.password) {
+                        return reject({text: "用户名和密码不能为空！", type: "warning"});
                     }
-                })
-            }
-            ,
+                    login(this.form.username, this.form.password).then(res => {
+                        const {code, data: userData, message, addition} = res.data;
+                        if (code === 10000) {
+                            if (!userData.rid) {
+                                return reject({text: "该账号无角色信息,请联系管理员！", type: "warning"});
+                            }
+                            localStorage.setItem('operator', this.$base64.encode(JSON.stringify(userData)));
+                            // this.$store.commit('setOperatorInfo', data);
+                            this.setOperatorInfo(userData);
+                            this.temp = userData.rid;
+                            resolve();
 
-            register() {
+                        } else if (code === 10301
+                        ) {
+                            this.form.username = '';
+                            this.form.password = '';
+                            return reject({text: "用户名或密码错误！", type: "error"});
+                        } else {
+                            return reject({text: "登录失败！", type: "error"});
+                        }
+                    })
+
+                })
+            },
+
+            getOperatorInfo() {
+                return new Promise((resolve, reject) => {
+                    getRoleInfoById(this.temp).then(res => {
+                            const {code, data, message, addition} = res.data;
+                            if (code === 10000) {
+                                localStorage.setItem('role', this.$base64.encode(JSON.stringify(data)));
+                                this.setOperatorRole(data);
+                                resolve();
+                            } else {
+                                return reject({text: "获取角色信息失败！", type: "error"});
+                            }
+                        }
+                    );
+
+                })
+
+            },
+            async loginHandler() {
+                await this.checkAccount();
+                await this.getOperatorInfo();
+            },
+            loginFn() {
+                this.loginHandler().then(res => {
+                    // this.$router.addRoutes([dynamicRoutes]);
+                    // this.$router.options.routes.push(dynamicRoutes);
+                    this.globalMixin_jump('Home');
+                }).catch(({text, type}) => {
+                    this.ele_alert(text, type);
+                });
+
+            },
+            registerFn() {
                 this.tips("暂不支持注册 请联系管理员", "warning");
             }
             ,

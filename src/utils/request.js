@@ -39,6 +39,7 @@ request.interceptors.response.use(function (response) {
   if (data) {
     if (data["code"] !== 10000) {
       vueObj.ele_notify(data["message"], "warning", data["code"]);
+
     }
   }
 
@@ -47,10 +48,10 @@ request.interceptors.response.use(function (response) {
 
   const {response: {status}} = error;
 
-
   if (status === 401) {
     vueObj.ele_notify("未登录", "error", status);
   } else if (status === 404) {
+
     vueObj.ele_notify("资源请求错误", "error", status);
   } else if (status >= 500) {
     vueObj.ele_notify("服务器错误", "error", status);

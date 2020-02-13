@@ -74,7 +74,7 @@
               row-key="id"
               stripe
               style="width: 100%"
-              v-loading="loading"
+              v-loading="tableMixin_tableLoading"
             >
               <el-table-column
                 align="center"
@@ -244,7 +244,6 @@
         props: {},
         data() {
             return {
-                loading: true,
                 dialogTitle: "",
                 editId: 0,
                 dialogFormVisible: false,
@@ -382,7 +381,7 @@
              */
             getTableDataSource() {
 
-                this.loading = true;
+                this.tableMixin_tableLoading = true;
                 return new Promise((resolve, reject) => {
                     getOperatorList(
                         this.tableMixin_currentPage,
@@ -407,7 +406,7 @@
                     }).catch(error => {
                         reject(error);
                     }).finally(() => {
-                        this.loading = false;
+                        this.tableMixin_tableLoading = false;
                     })
                 })
 
@@ -517,7 +516,6 @@
              * 获取数据
              */
             async getData() {
-                this.loading = true;
                 await this.getSearchParameters();
                 await this.getTableDataSource();
             }
