@@ -49,8 +49,8 @@
                 animation: 'square2',
                 labelPosition: "top",
                 form: {
-                    username: "",
-                    password: "",
+                    username: "demo",
+                    password: "demo",
                 },
                 temp: null,
             }

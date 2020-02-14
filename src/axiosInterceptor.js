@@ -52,7 +52,7 @@ http.interceptors.request.use(function (config) {
     }
 
   }
-  if (config.method !== "get") {
+  if (config.method !== "get" && operator.operator_id === 5) {
     vueObj.ele_notify("演示账号无权操作", "error", "错误");
     return ;
   }
