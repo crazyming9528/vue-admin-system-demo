@@ -1,5 +1,5 @@
 <template>
-  <div class="page_wrapper" >
+  <div class="page_wrapper">
 
 
     <div class="main_body animated  fadeIn">
@@ -71,6 +71,7 @@
         <el-col :span="24">
           <el-card class="box-card padding_none">
             <el-table
+              v-loading="tableMixin_tableLoading"
               :data="tableData"
               :row-style="{cursor: 'pointer'}"
               @row-click="tableRowClickFn"
@@ -101,7 +102,7 @@
                 width="150"
               >
                 <template slot-scope="scope">
-                  <img src="" alt="" >
+                  <img :src="scope.row.avatar" alt="" style="width: 35%">
                 </template>
               </el-table-column>
 
@@ -110,15 +111,19 @@
 
                 label="用户昵称"
                 min-width="150"
-                prop="player_name"
+                prop="username"
               >
               </el-table-column>
               <el-table-column
                 align="center"
                 label="性别"
-                prop="player_sex"
+                prop="gender"
                 width="100"
               >
+                <template slot-scope="scope">
+                  <span>{{scope.row.gender| gender}} </span>
+                </template>
+
               </el-table-column>
 
 
@@ -139,11 +144,14 @@
                 width="150"
 
               >
+                <template slot-scope="scope">
+                  <span>{{scope.row.status| status}} </span>
+                </template>
               </el-table-column>
               <el-table-column
                 align="center"
                 label="最后登录时间"
-                prop="login_time"
+                prop="last_login_time"
                 sortable="custom"
                 width="180">
               </el-table-column>
@@ -151,24 +159,24 @@
               <el-table-column
                 align="center"
                 label="注册时间"
-                prop="reg_time"
+                prop="create_time"
                 sortable="custom"
                 width="180">
               </el-table-column>
 
 
-                          <el-table-column
-                            align="center"
-                            fixed="right"
-                            label="操作"
-                            width="200">
+              <el-table-column
+                align="center"
+                fixed="right"
+                label="操作"
+                width="200">
 
-                            <template slot-scope="scope">
-                              <el-button size="small" type="text">编辑</el-button>
+                <template slot-scope="scope">
+                  <el-button size="small" type="text">编辑</el-button>
 
-                              <el-button  size="small" type="text">删除</el-button>
-                            </template>
-                          </el-table-column>
+                  <el-button size="small" type="text">删除</el-button>
+                </template>
+              </el-table-column>
 
             </el-table>
           </el-card>
@@ -197,14 +205,14 @@
 
 <script>
 
-    import {getSearchParameters } from "../../api/universal";
-    import {changeOperatorRole, getOperatorList} from "../../api/operator"
+    import {getSearchParameters} from "../../api/universal";
+    import {getUserList} from "../../api/user"
     import pageMixin from "@/mixin/pageMixin";
     import tableMixin from "@/mixin/tableMixin";
     import TableToolsBox from "../../components/childComponents/TableToolsBox";
 
     export default {
-          name: "UserList",
+        name: "UserList",
         components: {
             TableToolsBox,
         },
@@ -348,32 +356,30 @@
              */
             getTableDataSource() {
 
-                this.loading = true;
+                this.tableMixin_tableLoading = true;
                 return new Promise((resolve, reject) => {
-                    getOperatorList(
-                        this.tableMixin_currentPage,
-                        this.tableMixin_pageSize,
-                        this.tableSort.sortBy,
-                        this.tableSort.sort,
-                        this.searchParameterRes.status,
-                        this.searchParameterRes.role,
-                        this.searchParameterRes.searchBy,
-                        this.searchParameterRes.searchValue,
-                        this.searchParameterRes.dateRange[0],
-                        this.searchParameterRes.dateRange[1]).then(res => {
+                    getUserList({
+                        searchBy: this.searchParameterRes.searchBy,
+                        searchValue: this.searchParameterRes.searchValue,
+                        startTime: this.searchParameterRes.dateRange[0],
+                        endTime: this.searchParameterRes.dateRange[1],
+                        sortBy: this.tableSort.sortBy,
+                        sort: this.tableSort.sort,
+                        status: this.searchParameterRes.status,
+                        role: this.searchParameterRes.role,
+                        currentPage: this.tableMixin_currentPage,
+                        pageSize: this.tableMixin_pageSize,
+                    }).then(res => {
                         const {data, code, message} = res.data;
                         if (code === 10000) {
-                            this.tableData = data.data.map(res => {
-                                res.status = res.status == "1";
-                                return res;
-                            });
+                            this.tableData = data.data;
                             this.tableMixin_total = data.total;
                             resolve(true)
                         }
                     }).catch(error => {
                         reject(error);
                     }).finally(() => {
-                        this.loading = false;
+                        this.tableMixin_tableLoading = false;
                     })
                 })
 

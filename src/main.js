@@ -56,6 +56,24 @@ Vue.filter('formatDate', function (value, formatString) {
   return moment(value).format(formatString);
 });
 
+Vue.filter('gender', function (value) {
+
+  let res = "";
+  if (value == 1) {
+    res = "男";
+  } else if (value == 0) {
+    res = "女";
+  } else {
+    res = "未知 ";
+  }
+  return res;
+});
+
+Vue.filter('status', function (value) {
+
+  return value == 1 ? "封禁" : "正常";
+});
+
 
 /* eslint-disable no-new */
 window.vueObj = new Vue({

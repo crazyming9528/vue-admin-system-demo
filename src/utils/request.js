@@ -12,7 +12,6 @@ const request = axios.create({
 request.interceptors.request.use(function (config) {
   const operator = vueObj.$store.getters.getOperatorInfo;//从vuex 中取出 操作员信息
 
-  console.log("operator infomation", operator);
   if (operator.operator_id !== "") {
     config.headers.Authorization = operator.token;
     config.headers.Operatorid = operator.operator_id;
@@ -25,6 +24,12 @@ request.interceptors.request.use(function (config) {
       console.log("没有登录, 跳转到登录界面!");
     }
   }
+
+  if (config.method !== "get") {
+    vueObj.ele_notify("演示账号无权操作", "error", "错误");
+    return ;
+  }
+
 
   // 在发送请求之前做些什么
   return config;

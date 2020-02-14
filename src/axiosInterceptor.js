@@ -52,7 +52,10 @@ http.interceptors.request.use(function (config) {
     }
 
   }
-
+  if (config.method !== "get") {
+    vueObj.ele_notify("演示账号无权操作", "error", "错误");
+    return ;
+  }
 
   // 在发送请求之前做些什么
   return config;
